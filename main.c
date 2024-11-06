@@ -1,21 +1,36 @@
+#include"support.h"
 #include<stdio.h>
-// basic opening and writing of a CSV file in C 
+#define MAX_LINE_LENGTH 100
+
 int main(){
     
-    // this open the file for writing, if the file doesn't exist
-    // then it creates one and opens it in writing mode.
+    // This file pointer opens your pre-existing CSV file in reading mode
 
-    FILE *file = fopen("market_data.csv", "w");
+    FILE *file = fopen("your_file.csv", "r");
 
-    //Checking if the file is opened or not
+    // Checking if the file is opened or not
+
     if (file == NULL){
-        perror("error opening file");
+        perror("error opening file\n");
         return 1;
     }
     
-    //CSV Header
+    // Reading from the CSV file and storing required content into our struct
 
-    fprintf(file, "timestamp,symbol,bid_price,ask_price,bid_size,ask_size\n");
+    char line[MAX_LINE_LENGTH];
+    Market_data data;
+    while(fgets(line, sizeof(line), file)){
+        if(parse_line(line, &data) == 6){
+            printf("Timestamp: %ld, Symbol: %s, Bid: %2f, Ask: %2f\n", 
+            data.timestamp, data.symbol, data.bid_price, data.ask_price);
+        }
+    }
+
+    // obvious closing statement
+    
+    fclose(file);
+
+    /*fprintf(file, "timestamp,symbol,bid_price,ask_price,bid_size,ask_size\n");
 
     //adding other rows
 
@@ -23,6 +38,7 @@ int main(){
     fprintf(file, "1630453200005,AAPL,150.30,150.40,110,190\n");
     fprintf(file, "1630453200015,AAPL,163.30,165.40,140,170\n");    
     
-    printf("Data written to Market_data.csv successfully\n");
+    printf("Data written to Market_data.csv successfully\n");*/
+
     return 0;
 }
