@@ -5,26 +5,31 @@
 #include "string.h"
 #include <stdio.h>
 // A typed defined struct which holds all the important info
-// which you need, this cna be edited as per you requirement
+// which you need, this can be edited as per you requirement
 
 typedef struct {        
     long timestamp;
     char symbol[10];
+    char owner[20];
     float bid_price;
     float ask_price;
+    float cap;
     int bid_size;
     int ask_size;
+
 
 }Market_data;
 
 // This function parse lines from a CSV file to the Market_data struct
 
 int parse_line(const char *line, Market_data *data){
-    return sscanf(line, "%ld,%[^,],%f,%f,%d,%d",
+    return sscanf(line, "%ld,%[^,],%[^,],%f,%f,%f,%d,%d",
                   &data->timestamp,
                   data->symbol,
+                  data->owner,
                   &data->bid_price,
                   &data->ask_price,
+                  &data->cap,
                   &data->bid_size,
                   &data->ask_size);
 }
