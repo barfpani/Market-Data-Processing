@@ -23,14 +23,14 @@ typedef struct {
 // This function parse lines from a CSV file to the Market_data struct
 
 int parse_line(const char *line, Market_data *data){
-    return sscanf(line, "%ld,%[^,],%[^,],%f,%f,%f,%d,%d",
+    return sscanf(line, "%ld,%[^,],%f,%f,%d,%d,%f,%[^,]",
                   &data->timestamp,
                   data->symbol,
-                  data->owner,
                   &data->bid_price,
                   &data->ask_price,
-                  &data->cap,
                   &data->bid_size,
-                  &data->ask_size);
+                  &data->ask_size,
+                  &data->cap,
+                  data->owner);
 }
 #endif
