@@ -8,14 +8,14 @@
 // which you need, this can be edited as per you requirement
 
 typedef struct {        
-    long timestamp;
+    //long timestamp;
     char symbol[10];
-    char owner[20];
-    float bid_price;
-    float ask_price;
-    float cap;
-    int bid_size;
-    int ask_size;
+    //char owner[20];
+    float open;
+    float close;
+    float LTP;
+    float volume;
+    float value;
 
 
 }Market_data;
@@ -23,14 +23,15 @@ typedef struct {
 // This function parse lines from a CSV file to the Market_data struct
 
 int parse_line(const char *line, Market_data *data){
-    return sscanf(line, "%ld,%[^,],%f,%f,%d,%d,%f,%[^,]",
-                  &data->timestamp,
+    return sscanf(line, "%[^,],%f,%f,%f,%f,%f",
+                  //&data->timestamp,
                   data->symbol,
-                  &data->bid_price,
-                  &data->ask_price,
-                  &data->bid_size,
-                  &data->ask_size,
-                  &data->cap,
-                  data->owner);
+                  &data->open,
+                  &data->close,
+                  &data->LTP,
+                  &data->volume,
+                  &data->value
+                  //data->owner
+                  );
 }
 #endif

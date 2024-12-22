@@ -1,12 +1,12 @@
 #include"support.h"
 #include<stdio.h>
-#define MAX_LINE_LENGTH 100
+#define MAX_LINE_LENGTH 200
 
 int main(){
     
-    // This file pointer opens your pre-existing CSV file in reading mode
+    // This file pointer opens our pre-existing CSV file in reading mode
 
-    FILE *file = fopen("testing.csv", "r");
+    FILE *file = fopen("stocks.csv", "r");
 
     // Checking if the file is opened or not
 
@@ -20,9 +20,10 @@ int main(){
     char line[MAX_LINE_LENGTH];
     Market_data data;
     while(fgets(line, sizeof(line), file)){
-        if(parse_line(line, &data) == 8){
-            printf("Timestamp: %ld, Symbol: %s, Bid: %2f, Ask: %2f, Bid_Size: %d, Ask_Size: %d, Market_cap: %f, Owner: %s\n", 
-            data.timestamp, data.symbol, data.bid_price, data.ask_price, data.bid_size, data.ask_size, data.cap, data.owner);
+        if(parse_line(line, &data) == 6){
+            printf("Inside the 'if' statement");
+            printf("Symbol: %s, Open: %2f, Close: %2f, LTP: %2f, Volume: %2f, Value: %2f\n", 
+            data.symbol, data.open, data.close, data.LTP, data.volume, data.value);
         }
     }
 
