@@ -9,13 +9,13 @@
 
 typedef struct {        
     //long timestamp;
-    char symbol[10];
+    char symbol[15];
     //char owner[20];
-    float open;
-    float close;
-    float LTP;
-    float volume;
-    float value;
+    double OPEN;
+    double CLOSE;
+    double LTP;
+    double VOLUME;
+    double VALUE;
 
 
 }Market_data;
@@ -23,15 +23,14 @@ typedef struct {
 // This function parse lines from a CSV file to the Market_data struct
 
 int parse_line(const char *line, Market_data *data){
-    return sscanf(line, "%[^,],%f,%f,%f,%f,%f",
+    return sscanf(line, "%[^,],%lf ,%lf ,%lf ,%lf ,%lf",
                   //&data->timestamp,
                   data->symbol,
-                  &data->open,
-                  &data->close,
+                  &data->OPEN,
+                  &data->CLOSE,
                   &data->LTP,
-                  &data->volume,
-                  &data->value
-                  //data->owner
-                  );
+                  &data->VOLUME,
+                  &data->VALUE
+                );
 }
 #endif

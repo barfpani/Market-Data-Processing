@@ -6,7 +6,7 @@ int main(){
     
     // This file pointer opens our pre-existing CSV file in reading mode
 
-    FILE *file = fopen("stocks.csv", "r");
+    FILE *file = fopen("testing.csv", "r");
 
     // Checking if the file is opened or not
 
@@ -20,11 +20,11 @@ int main(){
     char line[MAX_LINE_LENGTH];
     Market_data data;
     while(fgets(line, sizeof(line), file)){
-        if(parse_line(line, &data) == 6){
-            printf("Inside the 'if' statement");
-            printf("Symbol: %s, Open: %2f, Close: %2f, LTP: %2f, Volume: %2f, Value: %2f\n", 
-            data.symbol, data.open, data.close, data.LTP, data.volume, data.value);
+        if(parse_line(line, &data) == 8){
+            printf("Symbol: %s, Open: %lf, Close: %lf, LTP: %lf, Volume: %lf, Value: %lf\n", 
+            data.symbol, data.OPEN, data.CLOSE, data.LTP, data.VOLUME, data.VALUE);
         }
+        //printf("Parse_line returned: %d\n", parse_line(line, &data));
     }
 
     // obvious closing statement
